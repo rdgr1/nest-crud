@@ -1,6 +1,6 @@
-# 📘 README — Projeto CRUD NestJS + PostgreSQL
+# Projeto CRUD NestJS + PostgreSQL
 
-## 🧠 Sobre
+## Sobre
 
 Projeto backend criado com NestJS usando TypeORM e PostgreSQL, contendo as entidades:
 
