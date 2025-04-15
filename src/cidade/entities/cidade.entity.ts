@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 import { Uf } from 'src/uf/entities/uf.entity';
+import { Estudante } from 'src/estudante/entities/estudante.entity';
 
 @Entity()
 export class Cidade {
@@ -11,4 +12,7 @@ export class Cidade {
 
   @ManyToOne(() => Uf, uf => uf.cidades)
   uf: Uf;
+
+  @OneToMany(() => Estudante, estudante => estudante.cidade)
+  estudantes: Estudante[];
 }
