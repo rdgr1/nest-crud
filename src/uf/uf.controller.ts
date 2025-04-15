@@ -1,3 +1,4 @@
+
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UfService } from './uf.service';
 import { CreateUfDto } from './dto/create-uf.dto';
@@ -5,30 +6,30 @@ import { UpdateUfDto } from './dto/update-uf.dto';
 
 @Controller('uf')
 export class UfController {
-  constructor(private readonly ufService: UfService) {}
+  constructor(private readonly service: UfService) {}
 
   @Post()
-  create(@Body() createUfDto: CreateUfDto) {
-    return this.ufService.create(createUfDto);
+  create(@Body() dto: CreateUfDto) {
+    return this.service.create(dto);
   }
 
   @Get()
   findAll() {
-    return this.ufService.findAll();
+    return this.service.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.ufService.findOne(+id);
+    return this.service.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUfDto: UpdateUfDto) {
-    return this.ufService.update(+id, updateUfDto);
+  update(@Param('id') id: string, @Body() dto: UpdateUfDto) {
+    return this.service.update(+id, dto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.ufService.remove(+id);
+    return this.service.remove(+id);
   }
 }

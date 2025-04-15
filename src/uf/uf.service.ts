@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Uf } from './entities/uf.entity';
 import { CreateUfDto } from './dto/create-uf.dto';
 import { UpdateUfDto } from './dto/update-uf.dto';
 
 @Injectable()
 export class UfService {
-  create(createUfDto: CreateUfDto) {
-    return 'This action adds a new uf';
+  constructor(
+    @InjectRepository(Uf)
+    private readonly repo: Repository<Uf>
+  ) {}
+
+  create(dto: CreateUfDto) {
+    const entity = this.repo.create(dto);
+    return this.repo.save(entity);
   }
 
   findAll() {
-    return `This action returns all uf`;
+    return this.repo.find({ relations: ['cidades'] });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} uf`;
+    return this.repo.findOne({ where: { id }, relations: ['cidades'] });
   }
 
-  update(id: number, updateUfDto: UpdateUfDto) {
-    return `This action updates a #${id} uf`;
+  update(id: number, dto: UpdateUfDto) {
+    return this.repo.update(id, dto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} uf`;
+    return this.repo.delete(id);
   }
 }
