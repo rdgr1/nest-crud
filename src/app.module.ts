@@ -9,12 +9,12 @@ import { EstudanteModule } from './estudante/estudante.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type:'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'rdgr777',
-      password: '995647',
-      database: 'crud_db',
+      type: 'postgres',
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT) || 5432,
+      username: process.env.DB_USERNAME || 'rdgr777',
+      password: process.env.DB_PASSWORD || '995647',
+      database: process.env.DB_DATABASE || 'crud_db',
       synchronize: true,
       autoLoadEntities: true,
     }),
